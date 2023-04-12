@@ -101,3 +101,23 @@ void add_el(HTable &tablet, Point const &new_key)
         tablet.load_factor += 1.f / tablet.size_t;
     }
 }
+
+Node *find_el(HTable &tablet, Point const &need_key)
+{
+    unsigned ind = hash_point(need_key) % tablet.size_t;
+    Node *head = tablet.table[ind];
+    bool found = false;
+    while (nullptr != head && !found)
+    {
+        found = equal_point(head->key, need_key);
+        if (found)
+        {
+            return head;
+        }
+        head = head->next;
+    }
+    if (!found)
+    {
+        return nullptr;
+    }
+}
