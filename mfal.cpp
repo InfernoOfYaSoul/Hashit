@@ -23,7 +23,7 @@ bool equal_point(Point const &first, Point const &second)
 // пример
 unsigned hash_point(Point const &p)
 {
-    return p.x;
+    return p.x << 10;
 }
 
 // прямая адресация и цепочка?
@@ -129,4 +129,10 @@ Node *find_el(HTable &tablet, Point const &need_key)
 // расширение таблицы ура марк шевелев
 void rehash(HTable &tablet, std::size_t new_size)
 {
+}
+
+
+
+int main(){
+    first_one(5);
 }
