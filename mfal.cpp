@@ -71,3 +71,33 @@ void erase_table(HTable &tablet)
 }
 
 // добавление эл-та
+void push_front(Node *&head_ref, Point new_key)
+{
+    if (head_ref == nullptr)
+    {
+        head_ref = new Node;
+        head_ref->key = new_key;
+    }
+    Node *new_node = new Node;
+    new_node->key = new_key;
+    new_node->next = head_ref;
+    head_ref = new_node;
+}
+
+void add_el(HTable &tablet, Point const &new_key)
+{
+    unsigned ind = hash_point(new_key) % tablet.size_t;
+    Node *head = tablet.table[ind];
+    bool found = false;
+    while (nullptr != head && !found)
+    {
+        found = equal_point(head->key, new_key);
+        head = head->next;
+    }
+    if (!found)
+    {
+        push_front(tablet.table[ind], new_key);
+        // tablet.table[ind] = push_front(tablet.table[ind], new_key);
+        tablet.load_factor += 1.f / tablet.size_t;
+    }
+}
