@@ -26,9 +26,10 @@ unsigned hash_point(Point const &p)
     return p.x << 10;
 }
 
-// прямая адресация и цепочка?
-unsigned right_hash_point(Point const &p)
+// деление
+unsigned del_hash_point(Point const &p, size_t size)
 {
+    return p.x % size;
 }
 
 // структура таблицы
@@ -127,6 +128,22 @@ Node *find_el(HTable &tablet, Point const &need_key)
     if (!found)
     {
         return nullptr;
+    }
+}
+
+// удаление элемента (не работает не написано не фурычит)
+void delete_el(HTable &tablet, Point const &need_key)
+{
+    unsigned ind = hash_point(need_key) % tablet.size_t;
+    Node *head = tablet.table[ind];
+    bool found = false;
+    while (nullptr != head && !found)
+    {
+        found = equal_point(head->key, need_key);
+        if (found)
+        {
+        }
+        head = head->next;
     }
 }
 
