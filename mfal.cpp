@@ -20,10 +20,13 @@ bool equal_point(Point const &first, Point const &second)
 }
 
 // хэш-функция
+// пример
 unsigned hash_point(Point const &p)
 {
     return p.x;
 }
+
+// прямая адресация и цепочка?
 
 struct HTable
 {
@@ -102,6 +105,7 @@ void add_el(HTable &tablet, Point const &new_key)
     }
 }
 
+// поиск элемента
 Node *find_el(HTable &tablet, Point const &need_key)
 {
     unsigned ind = hash_point(need_key) % tablet.size_t;
@@ -120,4 +124,9 @@ Node *find_el(HTable &tablet, Point const &need_key)
     {
         return nullptr;
     }
+}
+
+// расширение таблицы ура марк шевелев
+void rehash(HTable &tablet, std::size_t new_size)
+{
 }
