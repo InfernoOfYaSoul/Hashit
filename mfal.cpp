@@ -27,7 +27,11 @@ unsigned hash_point(Point const &p)
 }
 
 // прямая адресация и цепочка?
+unsigned right_hash_point(Point const &p)
+{
+}
 
+// структура таблицы
 struct HTable
 {
     Node **table;
@@ -129,10 +133,16 @@ Node *find_el(HTable &tablet, Point const &need_key)
 // расширение таблицы ура марк шевелев
 void rehash(HTable &tablet, std::size_t new_size)
 {
-}
-
-
-
-int main(){
-    first_one(5);
+    HTable tt = first_one(new_size);
+    for (std::size_t i = 0; i != tablet.size_t; ++i)
+    {
+        Node *head = tablet.table[i];
+        while (nullptr != head)
+        {
+            add_el(tt, head->key);
+            head = head->next;
+        }
+    }
+    erase_table(tablet);
+    tablet = tt;
 }
