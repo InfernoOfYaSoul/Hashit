@@ -147,7 +147,7 @@ void delete_el(HTable &tablet, Point const &need_key)
     }
 }
 
-// расширение таблицы ура марк шевелев
+// расширение таблицы
 void rehash(HTable &tablet, std::size_t new_size)
 {
     HTable tt = first_one(new_size);
@@ -162,4 +162,12 @@ void rehash(HTable &tablet, std::size_t new_size)
     }
     erase_table(tablet);
     tablet = tt;
+}
+
+int main()
+{
+    int size = 701;
+    HTable t = first_one(size);
+    erase_table(t);
+    return 0;
 }
