@@ -139,9 +139,12 @@ void delete_el(HTable &tablet, Point const &need_key)
     bool found = false;
     while (nullptr != head && !found)
     {
-        found = equal_point(head->key, need_key);
+        found = equal_point(head->next->key, need_key);
         if (found)
         {
+            Node *el = head->next->next;
+            delete head->next;
+            head->next = el;
         }
         head = head->next;
     }
