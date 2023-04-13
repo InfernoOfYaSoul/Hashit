@@ -1,6 +1,7 @@
 #include <iostream>
 
 using namespace std;
+
 struct Node
 {
     Point key;
@@ -20,13 +21,13 @@ bool equal_point(Point const &first, Point const &second)
 }
 
 // хэш-функция
-// пример
+// прямая адресация и цепочка адресация (функция не оч)
 unsigned hash_point(Point const &p)
 {
     return p.x << 10;
 }
 
-// деление
+// хэш-функция делением
 unsigned del_hash_point(Point const &p, size_t size)
 {
     return p.x % size;
@@ -40,7 +41,7 @@ struct HTable
     std::size_t size_t;
 };
 
-// ну типо инициализация таблицы?
+// инициализация таблицы
 HTable first_one(std::size_t size)
 {
     Node **table = new Node *[size];
@@ -78,7 +79,7 @@ void erase_table(HTable &tablet)
     delete[] tablet.table;
 }
 
-// добавление эл-та
+// добавление элемента
 void push_front(Node *&head_ref, Point new_key)
 {
     if (head_ref == nullptr)
@@ -105,7 +106,6 @@ void add_el(HTable &tablet, Point const &new_key)
     if (!found)
     {
         push_front(tablet.table[ind], new_key);
-        // tablet.table[ind] = push_front(tablet.table[ind], new_key);
         tablet.load_factor += 1.f / tablet.size_t;
     }
 }
@@ -131,7 +131,7 @@ Node *find_el(HTable &tablet, Point const &need_key)
     }
 }
 
-// удаление элемента (не работает не написано не фурычит)
+// удаление элемента
 void delete_el(HTable &tablet, Point const &need_key)
 {
     unsigned ind = hash_point(need_key) % tablet.size_t;
