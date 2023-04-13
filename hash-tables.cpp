@@ -1,5 +1,6 @@
 #include <iostream>
 
+// пожалуйста не бейте я пыталась
 using namespace std;
 
 struct Node
