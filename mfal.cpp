@@ -171,6 +171,11 @@ int main()
 {
     int size = 701;
     HTable t = first_one(size);
+
+    Point a;
+    a.x = 5;
+    a.y = 8;
+    add_el(t, a);
     erase_table(t);
     return 0;
 }
